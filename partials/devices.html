@@ -1,0 +1,31 @@
+
+<div class="container devices-content">
+
+  <div class="row">
+    <div ng-repeat="device in devices">
+      <div class="col-sm-4 u-txtCenter u-mbm">
+        <p class="txtM u-txtCenter u-txtUpper">{{device.name}}</p>
+        <div class="img-container">
+          <img tyle="vertical-align" class="img-center u-mbs" ng-src="{{device.icon}}"/>
+        </div>
+
+        <div ng-show="{{device.type == 'light'}}">
+          <span class="button button--ghost lightaction" data-action="on" data-id="{{device.id}}"> ON</span>
+          <span class="button button--ghost lightaction" data-action="off" data-id="{{device.id}}"> OFF</span>
+        </div>
+
+        <div ng-show="{{device.type == 'plug'}}">
+          <span class="button button--ghost wemoaction" data-action="on" data-id="{{device.id}}"> ON</span>
+          <span class="button button--ghost wemoaction" data-action="off" data-id="{{device.id}}"> OFF</span>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+  </div> <!-- row -->
+</div>

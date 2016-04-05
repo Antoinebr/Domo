@@ -1,0 +1,28 @@
+
+
+
+<div class="container home-body">
+
+  <div class="row">
+
+
+
+    <div ng-repeat="room in rooms">
+
+      <div class="col-sm-6 u-mbm ">
+        <p class="u-txtL u-txtUpper u-txtCenter">{{room.name}}</p>
+
+        <a href="#/devices/{{$index}}">
+          <img class="img-responsive img-center"ng-src="{{room.icon}}" />
+        </a>
+
+      </div>
+    </div>
+
+
+
+
+
+  </div> <!-- row -->
+
+</div> <!-- container -->
