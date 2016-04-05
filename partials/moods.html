@@ -1,0 +1,22 @@
+
+<div class="container devices-content">
+
+  <div class="row">
+
+    <div ng-repeat="mood in moods">
+      <div class="col-sm-12 u-txtCenter u-mbm">
+
+        <p class="txtM u-txtCenter u-txtUpper">{{mood.name}}</p>
+
+        <div class="img-container">
+          <img tyle="vertical-align" class="img-center u-mbs" ng-src="{{mood.icon}}"/>
+        </div>
+
+        <span class="button button--ghost moodlight" data-moodid="{{$index}}"> ON</span>
+
+
+      </div>
+    </div>
+
+  </div> <!-- row -->
+</div>

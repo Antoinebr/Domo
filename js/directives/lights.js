@@ -69,3 +69,56 @@ app.directive('wemoaction',function($http){
     }
   };
 });
+
+
+/**
+*
+*  MOODS
+*
+*/
+app.directive('moodlight',function($http){
+  return{
+    restrict: "C",
+
+    link: function(scope,element, attrs){
+
+      element.click(function(e){
+        e.preventDefault();
+
+        var moodid = $(this).data('moodid');
+
+        var mood = scope.moods[moodid].devices;
+
+
+        mood.forEach(function(entry) {
+          // console.log(entry.id);
+          // console.log(entry.value);
+
+          $http({
+            url: "api/hue/index.php",
+            method: "POST",
+            data: {
+              "light-mood" : true,
+              "light-id" : entry.id,
+              "light-value" : entry.value,
+              "light-brightness" : entry.brightness
+            }
+          }).success(function(data, status, headers, config) {
+
+            console.log(data);
+          }).error(function(data, status, headers, config) {
+            //$scope.status = status;
+          });
+
+        });
+
+        console.log("crash");
+
+
+
+
+
+      }); // click
+    }
+  };
+});

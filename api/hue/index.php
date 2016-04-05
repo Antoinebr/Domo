@@ -26,8 +26,19 @@ if(isset($_POST)){
   if (isset($params['light-id'])){
 
     $light = $client->getLights()[$params['light-id']];
-    if( $params['light-action'] == "on" ) $light->setOn(true);
-    if( $params['light-action'] == "off" ) $light->setOn(false);
+
+    if(isset($params['light-action'])){
+      if( $params['light-action'] == "on" ) $light->setOn(true);
+      if( $params['light-action'] == "off" ) $light->setOn(false);
+    }
+
+    if(isset($params['light-mood'])){
+      print_r($params);
+      $light->setOn(true);
+      $light->setHue($params['light-value']);
+      $light->setBrightness($params['light-brightness']);
+
+    }
 
     echo "ope sur -> ".$params['light-id'];
 

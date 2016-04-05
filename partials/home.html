@@ -9,7 +9,7 @@
 
     <div ng-repeat="room in rooms">
 
-      <div class="col-sm-6 u-mbm ">
+      <div class="col-sm-4 u-mbm ">
         <p class="u-txtL u-txtUpper u-txtCenter">{{room.name}}</p>
 
         <a href="#/devices/{{$index}}">
@@ -17,6 +17,14 @@
         </a>
 
       </div>
+    </div>
+
+    <div class="col-sm-4 u-mbm ">
+      <p class="u-txtL u-txtUpper u-txtCenter">Moods</p>
+
+      <a href="#/moods">
+        <img class="img-responsive img-center" src="img/glass.svg" />
+      </a>
     </div>
 
 

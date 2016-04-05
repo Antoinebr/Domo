@@ -8,6 +8,8 @@ app.config(function($routeProvider){
 
   .when('/devices/:id' , {templateUrl: 'partials/devices.html', controller: 'DevicesCtrl'})
 
+  .when('/moods' , {templateUrl: 'partials/moods.html', controller: 'MoodsCtrl'})
+
 
 
   .otherwise({redirectTo : '/'});
