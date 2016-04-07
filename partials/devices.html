@@ -10,13 +10,21 @@
         </div>
 
         <div ng-show="{{device.type == 'light'}}">
-          <span class="button button--ghost lightaction" data-action="on" data-id="{{device.id}}"> ON</span>
-          <span class="button button--ghost lightaction" data-action="off" data-id="{{device.id}}"> OFF</span>
+
+          <lightaction ng-click="lightCtrl.togglePower(device.id)" class="button button--ghost u-txtUpper">ON / OFF</lightaction>
+
+
+          <div class="u-mts">
+            <input ng-model="brightness" ng-change="brightnessCtrl.setBrightness(brightness)" class="brightness" type="range" min="0" max="255" />
+
+          </div>
+
         </div>
 
         <div ng-show="{{device.type == 'plug'}}">
-          <span class="button button--ghost wemoaction" data-action="on" data-id="{{device.id}}"> ON</span>
-          <span class="button button--ghost wemoaction" data-action="off" data-id="{{device.id}}"> OFF</span>
+
+          <wemo ng-click="wemoCtrl.togglePower()" class="button button--ghost wemoaction"> ON / OFF</wemo>
+
         </div>
 
       </div>

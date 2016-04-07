@@ -5,24 +5,27 @@
 */
 app.directive('lightaction',function($http){
   return{
-    restrict: "C",
+    restrict: "E",
+    controller : function(){
 
-    link: function(scope,element, attrs){
+      this.state = "off";
 
-      element.click(function(e){
-        e.preventDefault();
+      this.togglePower = function(id){
 
-        var lightId = $(this).data('id');
-        var action = $(this).data('action');
-        console.log("crash");
-        console.log(action);
+        this.state = ('on' === this.state) ?  'off' : "on";
+        console.log("state to hue "+this.state);
+        this.sendToHue(id,this.state);
+      };
+
+
+      this.sendToHue = function(id,state){
 
         $http({
           url: "api/hue/index.php",
           method: "POST",
           data: {
-            "light-id" : lightId,
-            "light-action" : action
+            "light-id" : id,
+            "light-action" : state,
           }
         }).success(function(data, status, headers, config) {
 
@@ -31,31 +34,36 @@ app.directive('lightaction',function($http){
           //$scope.status = status;
         });
 
+      };
 
-      }); // click
-    }
+
+
+    },
+    controllerAs : 'lightCtrl',
+
   };
 });
 
 
-app.directive('wemoaction',function($http){
+app.directive('wemo',function($http,Rooms){
   return{
-    restrict: "C",
+    restrict: "E",
+    controller : function(){
 
-    link: function(scope,element, attrs){
 
-      element.click(function(e){
-        e.preventDefault();
+      this.togglePower = function(){
 
-        var action = $(this).data('action');
-        console.log("crash");
-        console.log(action);
+        this.toggleWemo();
+      };
+
+
+      this.toggleWemo = function(state){
 
         $http({
           url: "api/wemo/index.php",
           method: "POST",
           data: {
-            "wemo-action" : action
+            "wemo-action" : 'action'
           }
         }).success(function(data, status, headers, config) {
 
@@ -63,10 +71,10 @@ app.directive('wemoaction',function($http){
         }).error(function(data, status, headers, config) {
           //$scope.status = status;
         });
+      };
 
-
-      }); // click
-    }
+    },
+    controllerAs : 'wemoCtrl',
   };
 });
 
@@ -120,5 +128,66 @@ app.directive('moodlight',function($http){
 
       }); // click
     }
+  };
+});
+
+
+
+
+/**
+*
+*  Brighnes
+*
+*/
+app.directive('brightness',function($http){
+  return{
+    restrict: "C",
+    controller: function($scope){
+
+      this.BrightValue = 0;
+      console.log(this.BrightValue);
+
+
+
+      this.setBrightness = function(bgtn){
+        this.brightness = bgtn;
+
+
+        var that = this;
+        setTimeout(function(){
+          that.updateBrighness(that.brightness);
+        },800);
+
+      };
+
+
+      this.updateBrighness = function(value){
+
+        $http({
+          url: "api/hue/index.php",
+          method: "POST",
+          data: {
+            "light-mood" : true,
+            "light-id" : $scope.device.id,
+            "light-value" : 12000,
+            "light-brightness" : value
+          }
+        }).success(function(data, status, headers, config) {
+
+          console.log(data);
+        }).error(function(data, status, headers, config) {
+          //$scope.status = status;
+        });
+
+
+      };
+
+
+
+
+    },
+    controllerAs : 'brightnessCtrl'
+
+
   };
 });

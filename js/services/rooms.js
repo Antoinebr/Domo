@@ -1,4 +1,4 @@
-app.factory('Rooms', function (){
+app.factory('Rooms', function ($http){
 
   var Rooms = {
     'rooms' : [
@@ -41,14 +41,19 @@ app.factory('Rooms', function (){
 
       }
     ],
-
+    wemoState : null,
+    init : function(){
+      this.getWemoState();
+    },
     getRooms :  function(){
       return this.rooms;
     },
     getDevices : function(id){
       return this.rooms[id].devices;
     }
+
   };
+
 
   return Rooms;
 
