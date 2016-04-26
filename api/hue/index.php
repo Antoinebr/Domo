@@ -28,8 +28,7 @@ if(isset($_POST)){
     $light = $client->getLights()[$params['light-id']];
 
     if(isset($params['light-action'])){
-      if( $params['light-action'] == "on" ) $light->setOn(true);
-      if( $params['light-action'] == "off" ) $light->setOn(false);
+      ($light->isOn()) ? $light->setOn(false) : $light->setOn(true);
     }
 
     if(isset($params['light-mood'])){
